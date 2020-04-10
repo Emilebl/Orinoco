@@ -28,3 +28,26 @@ ul {
 li {
     list-style-type: none;
 }
+
+#product-grid {
+    height: 100%;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 2vw;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.products {
+    border: 2px solid blue;
+    width: 30vw;
+    height: 30vw;
+    margin: auto;
+    margin-bottom: 2vw;
+}
+
+img {
+    width: 100%;
+}
