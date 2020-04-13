@@ -48,14 +48,36 @@
         //     request.send();
 
 
+        function getURL() {
+            return window.location.href;
+        }
+
+        function getElement() {
+            var url = new URL(getURL());
+            var urlId = url.searchParams.get('id');
+            console.log(urlId);
+            return urlId;
+        }
+
+
+        function returnObject(id) {
+            const express = require('express');
+            const router = express.Router();
+            const cameraCtrl = require('../controllers/camera');
+            var camera = router.get('/:' + id, cameraCtrl.getOneCamera);
+            console.log(id);
+            return camera;
+        }
 
 
         var displayProduct = function() {
-            imageDisplay.setAttribute(src, this.imageUrl);
-            nameDisplay.innerHTML = this.name;
-            priceDisplay.innerHTML = this.price;
-            descriptionDisplay.innerHTML = this.description;
-            this.lenses.forEach((lense) => {
+            var urlId = getElement();
+            var camera = returnObject(urlId);
+            imageDisplay.setAttribute(src, camera.imageUrl);
+            nameDisplay.innerHTML = camera.name;
+            priceDisplay.innerHTML = camera.price;
+            descriptionDisplay.innerHTML = camera.description;
+            camera.lenses.forEach((lense) => {
                 var option = document.createElement('option');
                 option.value = this.lense;
                 option.innerHTML = this.lense;
@@ -65,7 +87,9 @@
 
         }
 
-        // displayProduct ()
+
+
+        displayProduct ();
 
 
 
