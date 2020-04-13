@@ -31,11 +31,24 @@
             </div>
         </section>
     <script>
-        const imageDisplay = document.getElementById("image");
+        const imageDisplay = document.getElementById("image"); 
         const nameDisplay = document.getElementById("name");
         const priceDisplay = document.getElementById("price");
         const descriptionDisplay = document.getElementById("description");
         const personalisationDisplay = document.getElementById("personalisation");
+
+        // var request = new XMLHttpRequest();
+        //         request.onload = function() {
+        //             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        //                 var productsData = JSON.parse(this.responseText);
+        //                 console.log(productsData);
+        //             }
+        //         }
+        //     request.open("GET", "http://localhost:3000/api/cameras");
+        //     request.send();
+
+
+
 
         var displayProduct = function() {
             imageDisplay.setAttribute(src, this.imageUrl);
@@ -51,6 +64,8 @@
             // personalisationDisplay=  this.lenses.type;
 
         }
+
+        // displayProduct ()
 
 
 
