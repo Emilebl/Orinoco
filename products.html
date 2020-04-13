@@ -26,7 +26,7 @@
                 <h3 id="name"></h3>
                 <p id="price"></p>
                 <p id="description"></p>
-                <select id="personalisation" name="lentilles" required></select>
+                <select id="personalisation" name="lentilles" required>--Please choose an option--</select>
                 <!-- <a href="" class = "add-to-basket"><i class="fas fa-plus"></i></a> -->
             </div>
         </section>
@@ -42,6 +42,12 @@
             nameDisplay.innerHTML = this.name;
             priceDisplay.innerHTML = this.price;
             descriptionDisplay.innerHTML = this.description;
+            this.lenses.forEach((lense) => {
+                var option = document.createElement('option');
+                option.value = this.lense;
+                option.innerHTML = this.lense;
+                personalisationDisplay.appendChild(option);
+            })
             // personalisationDisplay=  this.lenses.type;
 
         }
