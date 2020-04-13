@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orinoco, vente thématique en ligne !</title>
-    <link href="css/style.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <header>
-        <div>
-          <!--LOGO ORINOCO-->
-          <h1>ORINOCO</h1>
-        </div>
-        <nav>
-            <ul>
-                <li>Produits</li>
-                <li>Panier</li>
-            </ul>
-        </nav>
-    </header>
-    <div>  BANNER  </div>
-    <section id="product-grid">
-        
-    </section>
-
-    <script>
-        const productGrid = document.getElementById("product-grid");
-
-        var request = new XMLHttpRequest();
-            request.onload = function() {
-                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    var productsData = JSON.parse(this.responseText);
-                    console.log(productsData);
-                    productsData.forEach((product) => {
-                        const afficherProduit = `<div class="products"><img src="${product.imageUrl}"><h3>${product.name}</h3><p>${product.price}</p><p>${product.description}</p><a href="#" class = "add-to-basket"><i class="fas fa-plus"></i></a></div>`;
-                        productGrid.innerHTML += afficherProduit;
-                    }
-                )};
-            };
-            request.open("GET", "http://localhost:3000/api/cameras");
-            request.send();
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Orinoco, vente thématique en ligne !</title>
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div>
+            <!--LOGO ORINOCO-->
+            <h1>ORINOCO</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>Acceuil Produits</li>
+                    <li>Panier</li>
+                </ul>
+            </nav>
+        </header>
+        <div>  BANNER  </div>
+        <section id="product-grid">
             
-    </script>
-</body>
+        </section>
+
+        <script>
+            const productGrid = document.getElementById("product-grid");
+
+            var request = new XMLHttpRequest();
+                request.onload = function() {
+                    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                        var productsData = JSON.parse(this.responseText);
+                        console.log(productsData);
+                        productsData.forEach((product) => {
+                            const afficherProduit = `<div class="products"><img src="${product.imageUrl}"><h3>${product.name}</h3><p>${product.price}</p><p>${product.description}</p><a href="products.html/${product.id}" class = "add-to-basket"><i class="fas fa-plus"></i></a></div>`;
+                            productGrid.innerHTML += afficherProduit;
+                        }
+                    )};
+                };
+                request.open("GET", "http://localhost:3000/api/cameras");
+                request.send();
+
+            
+                
+        </script>
+    </body>
 </html>

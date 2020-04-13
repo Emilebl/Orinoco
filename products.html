@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Orinoco, vente thématique en ligne !</title>
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div>
+            <!--LOGO ORINOCO-->
+            <h1>ORINOCO</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>Acceuil Produits</li>
+                    <li>Panier</li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <div id="product-template">
+                <img id="image">
+                <h3 id="name"></h3>
+                <p id="price"></p>
+                <p id="description"></p>
+                <select id="personalisation" name="lentilles" required></select>
+                <!-- <a href="" class = "add-to-basket"><i class="fas fa-plus"></i></a> -->
+            </div>
+        </section>
+    <script>
+        const imageDisplay = document.getElementById("image");
+        const nameDisplay = document.getElementById("name");
+        const priceDisplay = document.getElementById("price");
+        const descriptionDisplay = document.getElementById("description");
+        const personalisationDisplay = document.getElementById("personalisation");
+
+        var displayProduct = function() {
+            imageDisplay.setAttribute(src, this.imageUrl);
+            nameDisplay.innerHTML = this.name;
+            priceDisplay.innerHTML = this.price;
+            descriptionDisplay.innerHTML = this.description;
+            // personalisationDisplay=  this.lenses.type;
+
+        }
+
+
+
+    </script>
+    </body>
 </html>
