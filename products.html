@@ -22,7 +22,7 @@
         </header>
         <section>
             <div id="product-template">
-                <img id="image">
+                <img id="image" src="">
                 <h3 id="name"></h3>
                 <p id="price"></p>
                 <p id="description"></p>
@@ -55,43 +55,36 @@
         function getElement() {
             var url = new URL(getURL());
             var urlId = url.searchParams.get('id');
-            console.log(urlId);
             return urlId;
         }
 
+        var myId = getElement();
+        console.log(myId);
 
-        function returnObject(id) {
-            const express = require('express');
-            const router = express.Router();
-            const cameraCtrl = require('../controllers/camera');
-            var camera = router.get('/:' + id, cameraCtrl.getOneCamera);
-            console.log(id);
-            return camera;
-        }
+        var request = new XMLHttpRequest();
+        request.onload = function() {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                var camera = JSON.parse(this.responseText);
+                console.log(camera);
+                imageDisplay.src = camera.imageUrl;
+                nameDisplay.innerHTML = camera.name;
+                priceDisplay.innerHTML = camera.price;
+                descriptionDisplay.innerHTML = camera.description;
+                var cameraLenses = camera.lenses;
+                cameraLenses.forEach((lense) => {
+                    var option = document.createElement("option");
+                    option.appendChild(document.createTextNode('New Option Text'));
+                    personalisationDisplay.appendChild(option);
+                    option.value = lense;
+                    option.innerHTML = lense;
+                    console.log(option);
+                })
+            }    
+        };
 
-
-        var displayProduct = function() {
-            var urlId = getElement();
-            var camera = returnObject(urlId);
-            imageDisplay.setAttribute(src, camera.imageUrl);
-            nameDisplay.innerHTML = camera.name;
-            priceDisplay.innerHTML = camera.price;
-            descriptionDisplay.innerHTML = camera.description;
-            camera.lenses.forEach((lense) => {
-                var option = document.createElement('option');
-                option.value = this.lense;
-                option.innerHTML = this.lense;
-                personalisationDisplay.appendChild(option);
-            })
-            // personalisationDisplay=  this.lenses.type;
-
-        }
-
-
-
-        displayProduct ();
-
-
+        var myLocalHost = "http://localhost:3000/api/cameras/" + myId;
+        request.open("GET", myLocalHost);
+        request.send();
 
     </script>
     </body>
