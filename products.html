@@ -27,7 +27,10 @@
                     <h3 id="name"></h3>
                     <p id="price"></p>
                     <p id="description"></p>
-                    <select id="personalisation" name="lentilles" required>--Please choose an option--</select>
+                    <div id="personalisation">
+                        <p id="personalisation-name"></p>
+                        <select id="lenses" name="lentilles" required>--Please choose an option--</select>
+                    </div>
                 </div>
                 <!-- <a href="" class = "add-to-basket"><i class="fas fa-plus"></i></a> -->
             </div>
@@ -39,12 +42,13 @@
         const nameDisplay = document.getElementById("name");
         const priceDisplay = document.getElementById("price");
         const descriptionDisplay = document.getElementById("description");
-        const personalisationDisplay = document.getElementById("personalisation");
+        const personalisationName = document.getElementById("personalisation-name");
+        const personalisationDisplay = document.getElementById("lenses");
         const addToCart = document.createElement("button");
 
         // Création de la fonctionnalité d'ajout au panier (nombre d'item dans le panier + prix total du panier)
 
-        
+
         
         // Recupération de l'id du produit selectionné, dans l'url de la page actuelle
         function getURL() {
@@ -68,8 +72,8 @@
                 console.log(camera);
                 imageDisplay.src = camera.imageUrl;
                 nameDisplay.innerHTML = camera.name;
-                priceDisplay.innerHTML = camera.price;
-                descriptionDisplay.innerHTML = camera.description;
+                priceDisplay.innerHTML = camera.price + " €";
+                descriptionDisplay.innerHTML = "<span>Description:</span><br>" + camera.description;
                 addToCart.innerHTML = "Ajouter au panier";
                 addToCart.setAttribute("onclick","");
                 specification.appendChild(addToCart);
@@ -77,6 +81,7 @@
                 cameraLenses.forEach((lense) => {
                     var option = document.createElement("option");
                     option.appendChild(document.createTextNode('New Option Text'));
+                    personalisationName.innerHTML = "Choix de la lentille:";
                     personalisationDisplay.appendChild(option);
                     option.value = lense;
                     option.innerHTML = lense;

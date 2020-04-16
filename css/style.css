@@ -91,9 +91,20 @@ img {
     align-items: center;
 }
 
-select {
-    width: 20%;
+#description {
+    width: 80%;
+    text-align: justify;
 }
+
+#description span {
+    font-weight: bold;
+}
+
+#personalisation {
+    width: 40%;
+}
+
+select
 
 button {
     width: 30%;
