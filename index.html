@@ -6,6 +6,7 @@
         <title>Orinoco, vente thématique en ligne !</title>
         <link href="css/style.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
+        <script src="scripts/getproductlist.js" async></script>
     </head>
     <body>
         <header>
@@ -15,35 +16,13 @@
             </div>
             <nav>
                 <ul>
-                    <li>Acceuil Produits</li>
-                    <li>Panier</li>
+                    <li>Accueil Produits</li>
+                    <li>Panier: <span id="itemCounter">0</span></li>
                 </ul>
             </nav>
         </header>
         <div>  BANNER  </div>
         <section id="product-grid">
-            
         </section>
-
-        <script>
-            // Récupération de du conteneur de la liste de produit dans le DOM pour modifier ensuite son contenu
-            const productGrid = document.getElementById("product-grid");
-
-            // Récupération de la liste de produits de la catégorie "Camera" + affichage de la liste des produits
-            var request = new XMLHttpRequest();
-                request.onload = function() {
-                    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                        var productsData = JSON.parse(this.responseText);
-                        console.log(productsData);
-                        productsData.forEach((product) => {
-                            const afficherProduit = `<div class="products"><img src="${product.imageUrl}"><h3>${product.name}</h3><p>${product.price}</p><p>${product.description}</p><a href="products.html?id=${product._id}" class = "add-to-basket"><i class="fas fa-plus"></i></a></div>`;
-                            productGrid.innerHTML += afficherProduit;
-                            console.log(product._id);
-                        }
-                    )};
-                };
-                request.open("GET", "http://localhost:3000/api/cameras");
-                request.send();
-        </script>
     </body>
 </html>

@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Orinoco, vente thématique en ligne !</title>
+        <title>Produit ID</title>
         <link href="css/style.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
+        <script src="scripts/selectedproductpage.js" async></script>
     </head>
     <body>
         <header>
@@ -15,8 +16,8 @@
             </div>
             <nav>
                 <ul>
-                    <li>Acceuil Produits</li>
-                    <li>Panier: <span id="itemCounter">0</span></li>
+                    <li><a href="index.html">Accueil Produits</a></li>
+                    <li><a id="cartLink">Panier: <span id="itemCounter">0</span></a></li>
                 </ul>
             </nav>
         </header>
@@ -35,70 +36,5 @@
                 <!-- <a href="" class = "add-to-basket"><i class="fas fa-plus"></i></a> -->
             </div>
         </section>
-    <script>
-        // Recupération des éléments du DOM afin de les modifier ensuite
-        const specification = document.getElementById("specification");
-        const imageDisplay = document.getElementById("image"); 
-        const nameDisplay = document.getElementById("name");
-        const priceDisplay = document.getElementById("price");
-        const descriptionDisplay = document.getElementById("description");
-        const personalisationName = document.getElementById("personalisation-name");
-        const personalisationDisplay = document.getElementById("lenses");
-        const addToCartButton = document.createElement("button");
-        const itemCounter = document.getElementById("itemCounter");
-        
-        // Recupération de l'id du produit selectionné, dans l'url de la page actuelle
-        function getURL() {
-            return window.location.href;
-        }
-
-        function getElement() {
-            var url = new URL(getURL());
-            var urlId = url.searchParams.get('id');
-            return urlId;
-        }
-
-        var myId = getElement();
-
-        // Récupération du produit correspondant à l'id récupéré + affichage des propriétés spécifiques au produit
-        var request = new XMLHttpRequest();
-        request.onload = function() {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                var camera = JSON.parse(this.responseText);
-                imageDisplay.src = camera.imageUrl;
-                nameDisplay.innerHTML = camera.name;
-                priceDisplay.innerHTML = camera.price + " €";
-                descriptionDisplay.innerHTML = "<span>Description:</span><br>" + camera.description;
-                addToCartButton.innerHTML = "Ajouter au panier";
-                specification.appendChild(addToCartButton);
-                var cameraLenses = camera.lenses;
-                cameraLenses.forEach((lense) => {
-                    var option = document.createElement("option");
-                    option.appendChild(document.createTextNode('New Option Text'));
-                    personalisationName.innerHTML = "Choix de la lentille:";
-                    personalisationDisplay.appendChild(option);
-                    option.value = lense;
-                    option.innerHTML = lense;
-                })
-            }    
-        };
-        var myLocalHost = "http://localhost:3000/api/cameras/" + myId;
-        request.open("GET", myLocalHost);
-        request.send();
-
-        // Création de la fonctionnalité d'ajout au panier (nombre d'item dans le panier + prix total du panier)
-
-        var cartItems = [];
-        
-        console.log(cartItems);
-
-        addToCartButton.addEventListener("click", function addToCart(item) {
-            cartItems.push(item);
-            itemCounter.innerHTML = cartItems.length;
-            console.log(cartItems.length);
-        });
-        
-
-    </script>
     </body>
 </html>
