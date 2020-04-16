@@ -16,7 +16,7 @@
             <nav>
                 <ul>
                     <li>Acceuil Produits</li>
-                    <li>Panier</li>
+                    <li id="itemCounter">Panier</li>
                 </ul>
             </nav>
         </header>
@@ -33,12 +33,20 @@
             </div>
         </section>
     <script>
+        // Recupération des éléments du DOM afin de les modifier ensuite
+        const specification = document.getElementById("specification");
         const imageDisplay = document.getElementById("image"); 
         const nameDisplay = document.getElementById("name");
         const priceDisplay = document.getElementById("price");
         const descriptionDisplay = document.getElementById("description");
         const personalisationDisplay = document.getElementById("personalisation");
+        const addToCart = document.createElement("button");
 
+        // Création de la fonctionnalité d'ajout au panier (nombre d'item dans le panier + prix total du panier)
+
+        
+        
+        // Recupération de l'id du produit selectionné, dans l'url de la page actuelle
         function getURL() {
             return window.location.href;
         }
@@ -52,6 +60,7 @@
         var myId = getElement();
         console.log(myId);
 
+        // Récupération du produit correspondant à l'id récupéré + affichage des propriétés spécifiques au produit
         var request = new XMLHttpRequest();
         request.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -61,6 +70,9 @@
                 nameDisplay.innerHTML = camera.name;
                 priceDisplay.innerHTML = camera.price;
                 descriptionDisplay.innerHTML = camera.description;
+                addToCart.innerHTML = "Ajouter au panier";
+                addToCart.setAttribute("onclick","");
+                specification.appendChild(addToCart);
                 var cameraLenses = camera.lenses;
                 cameraLenses.forEach((lense) => {
                     var option = document.createElement("option");
@@ -72,7 +84,6 @@
                 })
             }    
         };
-
         var myLocalHost = "http://localhost:3000/api/cameras/" + myId;
         request.open("GET", myLocalHost);
         request.send();

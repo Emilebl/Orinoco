@@ -88,5 +88,13 @@ img {
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+    align-items: center;
+}
 
+select {
+    width: 20%;
+}
+
+button {
+    width: 30%;
 }

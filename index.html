@@ -26,8 +26,10 @@
         </section>
 
         <script>
+            // Récupération de du conteneur de la liste de produit dans le DOM pour modifier ensuite son contenu
             const productGrid = document.getElementById("product-grid");
 
+            // Récupération de la liste de produits de la catégorie "Camera" + affichage de la liste des produits
             var request = new XMLHttpRequest();
                 request.onload = function() {
                     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -42,8 +44,6 @@
                 };
                 request.open("GET", "http://localhost:3000/api/cameras");
                 request.send();
-            
-            
         </script>
     </body>
 </html>
