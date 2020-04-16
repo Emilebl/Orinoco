@@ -104,7 +104,9 @@ img {
     width: 40%;
 }
 
-select
+#personalisation-name {
+    font-weight: bold;
+}
 
 button {
     width: 30%;

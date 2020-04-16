@@ -16,7 +16,7 @@
             <nav>
                 <ul>
                     <li>Acceuil Produits</li>
-                    <li id="itemCounter">Panier</li>
+                    <li>Panier: <span id="itemCounter">0</span></li>
                 </ul>
             </nav>
         </header>
@@ -44,11 +44,8 @@
         const descriptionDisplay = document.getElementById("description");
         const personalisationName = document.getElementById("personalisation-name");
         const personalisationDisplay = document.getElementById("lenses");
-        const addToCart = document.createElement("button");
-
-        // Création de la fonctionnalité d'ajout au panier (nombre d'item dans le panier + prix total du panier)
-
-
+        const addToCartButton = document.createElement("button");
+        const itemCounter = document.getElementById("itemCounter");
         
         // Recupération de l'id du produit selectionné, dans l'url de la page actuelle
         function getURL() {
@@ -62,21 +59,18 @@
         }
 
         var myId = getElement();
-        console.log(myId);
 
         // Récupération du produit correspondant à l'id récupéré + affichage des propriétés spécifiques au produit
         var request = new XMLHttpRequest();
         request.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 var camera = JSON.parse(this.responseText);
-                console.log(camera);
                 imageDisplay.src = camera.imageUrl;
                 nameDisplay.innerHTML = camera.name;
                 priceDisplay.innerHTML = camera.price + " €";
                 descriptionDisplay.innerHTML = "<span>Description:</span><br>" + camera.description;
-                addToCart.innerHTML = "Ajouter au panier";
-                addToCart.setAttribute("onclick","");
-                specification.appendChild(addToCart);
+                addToCartButton.innerHTML = "Ajouter au panier";
+                specification.appendChild(addToCartButton);
                 var cameraLenses = camera.lenses;
                 cameraLenses.forEach((lense) => {
                     var option = document.createElement("option");
@@ -85,13 +79,25 @@
                     personalisationDisplay.appendChild(option);
                     option.value = lense;
                     option.innerHTML = lense;
-                    console.log(option);
                 })
             }    
         };
         var myLocalHost = "http://localhost:3000/api/cameras/" + myId;
         request.open("GET", myLocalHost);
         request.send();
+
+        // Création de la fonctionnalité d'ajout au panier (nombre d'item dans le panier + prix total du panier)
+
+        var cartItems = [];
+        
+        console.log(cartItems);
+
+        addToCartButton.addEventListener("click", function addToCart(item) {
+            cartItems.push(item);
+            itemCounter.innerHTML = cartItems.length;
+            console.log(cartItems.length);
+        });
+        
 
     </script>
     </body>
