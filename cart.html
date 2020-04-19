@@ -6,6 +6,7 @@
     <title>Panier - Passer la commande</title>
     <link href="css/style.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0daa0b934d.js" crossorigin="anonymous"></script>
+    <script src="scripts/cart.js" async></script>
 </head>
 <body>
     <header>
@@ -16,10 +17,14 @@
         <nav>
             <ul>
                 <li><a href="index.html">Accueil Produits</a></li>
-                <li><a id="cartLink">Panier: <span id="itemCounter">0</span></a></li>
+                <li><a id="cartLink" href="cart.html">Panier<span id="itemCounter"></span></a></li>
             </ul>
         </nav>
     </header>
+    <div id="cartContainer">
+
+    </div>
+    <button id="emptyCartButton">Vider le panier</button>
     
 </body>
 </html>

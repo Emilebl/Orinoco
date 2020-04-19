@@ -81,8 +81,9 @@ request.onload = function() {
                     let obj = {
                         id: myId,
                         title: camera.name,
+                        image: camera.imageUrl,
                         qty: 1,
-                        itemPrice: camera.price,
+                        itemPrice: camera.price/100,
                     };
                     // push the object to the contents of CART
                     CART.contents.push(obj);

@@ -111,3 +111,21 @@ img {
 button {
     width: 30%;
 }
+
+#cartContainer {
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cart-items {
+    width: 100%;
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cart-images {
+    width: 10vw;
+}
