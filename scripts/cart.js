@@ -98,7 +98,22 @@ let cartResume = CART.contents;
 cartResume.forEach((item) => {
     const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${item.itemPrice * item.qty} €</p>`;
     cartContainer.innerHTML += afficherItems;
+});
 
-})
 
-// emptyCartButton.addEventListener('click', CART.empty())
+// emptyCartButton.addEventListener('click', CART.empty());
+
+// FOR ORDER
+/**
+*
+* Expects request to contain:
+* contact: {
+*   firstName: string,
+*   lastName: string,
+*   address: string,
+*   city: string,
+*   email: string
+* }
+* products: [string] <-- array of product _id
+*
+*/
