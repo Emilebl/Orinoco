@@ -1,3 +1,5 @@
+// const e = require("express");
+
 const CART = {
     KEY: 'rfrgrdg45dg15drg1dr',
     contents: [],
@@ -96,10 +98,67 @@ const cartContainer = document.getElementById("cartContainer");
 let cartResume = CART.contents;
 
 cartResume.forEach((item) => {
-    const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${item.itemPrice * item.qty} €</p>`;
+    let prixTotalItem = item.itemPrice * item.qty;
+    const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
     cartContainer.innerHTML += afficherItems;
 });
 
+// Récupération de la liste des id des produits placés dans le panier
+let products = cartResume.map(function(item){
+    return item.id
+});
+console.log(products);
+
+// Récupération des information du formulaire
+
+// let firstNameValue = document.getElementById("fname").value;
+// let lastNameValue = document.getElementById("lname").value;
+// let addressValue = document.getElementById("address").value;
+// let cityValue = document.getElementById("city").value;
+// let emailValue = document.getElementById("email").value;
+
+
+
+// Envoi du formulaire
+
+let submitButton = document.getElementById("submit");
+let form = document.getElementById("theform");
+
+document.getElementById("theform").addEventListener('submit', function(){
+    // localStorage.setItem("contact", JSON.stringify(contact));
+    // localStorage.setItem("products", JSON.stringify(products));
+    // e.preventDefault;
+    let contact = {
+        firstName: document.getElementById("fname").value,
+        lastName: document.getElementById("lname").value,
+        adress: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        email: document.getElementById("email").value
+    }
+    console.log(contact);
+    console.log(products);
+    let order = {
+        contact,
+        products
+    };
+    console.log(order);
+    // return false;
+    var request = new XMLHttpRequest();
+    request.onload = function() {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            var orderConfirmation = JSON.parse(this.responseText);
+            console.log(orderConfirmation);
+        };
+    };
+    request.open("POST", "http://localhost:3000/api/cameras/order");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send("order");
+});
+
+document.getElementById('theformtest').onsubmit = function() { 
+	console.log(document.getElementById('searchTerm').value);
+  return false;
+};
 
 // emptyCartButton.addEventListener('click', CART.empty());
 
