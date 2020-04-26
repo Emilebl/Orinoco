@@ -9,11 +9,12 @@
     font-weight: normal;
     font-style: normal;
 }
-
+/*Mise en page générale du site (Header etc) */
 body {
     margin-right: 2%;
     margin-left: 2%;
     color: #343A40;
+    background-color: rgb(232, 250, 247);
 }
 
 h1 {
@@ -39,7 +40,7 @@ nav
     font-size: 1.3em;
 }
 
-ul {
+nav ul {
     width: 100%;
     /* border: 2px solid red; */
     display: flex;
@@ -66,12 +67,29 @@ p {
     font-size: 1em;
 }
 
+footer {
+    border-top: 2px dotted #343A40 ;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: #343A40;
+    font-family: sans-serif;
+}
+
+
+/*Mise en page du body de l'index*/
+
 #product-grid {
     height: 100%;
     padding-left: 2vw;
     padding-right: 2vw;
     padding-top: 2vw;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -95,6 +113,7 @@ p {
     text-align: justify;
     cursor: pointer;
     transition: all 0.4s ease;
+    background-color: rgb(248, 248, 248);
 }
 
 .products:hover {
@@ -112,12 +131,10 @@ p {
     }
   }
 
-
-
 img {
     width: 100%;
 }
-
+/*Mise en page de la page products */
 #product-template {
     margin-top: 3vw;
     margin-bottom: auto;
@@ -125,25 +142,31 @@ img {
     padding-left: 1vw;
     padding-bottom: 1vw;
     padding-right: 1vw;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     display: flex;
     justify-content: space-around;
+}
 
+#price {
+    font-weight: bold;
 }
 
 #image {
     width: 50%;
     border-radius: 3px;
     box-shadow: grey 3px 3px 8px 3px;
+    margin-right: 1%;
 }
 
 #specification {
-    border: 2px solid blue;
+    background-color: rgb(248, 248, 248);
+    border: 2px dotted rgb(161, 161, 161);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
     align-items: center;
+    margin-left: 1%;
 }
 
 #description {
@@ -165,22 +188,38 @@ img {
 
 button {
     width: 30%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
+/*Mise en page de la page panier */
 #cartContainer {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .cart-items {
-    width: 100%;
-    border: 2px solid red;
+    background-color: rgb(248, 248, 248);
+    width: 98%;
+    border: 2px dotted rgb(161, 161, 161);
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    padding-bottom: 0.5vw;
+    padding-top: 0.5vw;
 }
 
 .cart-images {
     width: 10vw;
+    border-radius: 3px;
+    box-shadow:grey 1px 1px 8px 1px;
+}
+
+#formsection {
+    display: flex;
+    justify-content: center;
 }

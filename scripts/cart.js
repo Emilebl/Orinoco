@@ -155,10 +155,10 @@ document.getElementById("theform").addEventListener('submit', function(){
     request.send();
 });
 
-document.getElementById('theformtest').onsubmit = function() { 
-	console.log(document.getElementById('searchTerm').value);
-  return false;
-};
+// document.getElementById('theformtest').onsubmit = function() { 
+// 	console.log(document.getElementById('searchTerm').value);
+//   return false;
+// };
 
 // emptyCartButton.addEventListener('click', CART.empty());
 

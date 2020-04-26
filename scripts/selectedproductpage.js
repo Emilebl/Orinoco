@@ -30,7 +30,7 @@ request.onload = function() {
         var camera = JSON.parse(this.responseText);
         imageDisplay.src = camera.imageUrl;
         nameDisplay.innerHTML = camera.name;
-        priceDisplay.innerHTML = camera.price + " €";
+        priceDisplay.innerHTML = camera.price/100 + " €";
         descriptionDisplay.innerHTML = "<span>Description:</span><br>" + camera.description;
         addToCartButton.innerHTML = "Ajouter au panier";
         specification.appendChild(addToCartButton);
