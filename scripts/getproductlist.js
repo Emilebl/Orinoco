@@ -8,7 +8,7 @@ var request = new XMLHttpRequest();
             var productsData = JSON.parse(this.responseText);
             console.log(productsData);
             productsData.forEach((product) => {
-                const afficherProduit = `<div class="products"><img src="${product.imageUrl}"><h3>${product.name}</h3><p>${product.price}</p><p>${product.description}</p><a href="products.html?id=${product._id}"><i class="fas fa-plus"></i></a></div>`;
+                const afficherProduit = `<div class="products"><a href="products.html?id=${product._id}"><img src="${product.imageUrl}"><div class="products-text"><h3>${product.name}</h3><p>${product.price/100} €</p><p>${product.description}</p></div>`;
                 productGrid.innerHTML += afficherProduit;
                 console.log(product._id);
             }

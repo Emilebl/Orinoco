@@ -1,6 +1,25 @@
+@font-face {
+    font-family: 'coolveticaregular';
+    src: url('fonts/coolvetica_rg-webfont.eot');
+    src: url('fonts/coolvetica_rg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/coolvetica_rg-webfont.woff2') format('woff2'),
+         url('fonts/coolvetica_rg-webfont.woff') format('woff'),
+         url('fonts/coolvetica_rg-webfont.ttf') format('truetype'),
+         url('fonts/coolvetica_rg-webfont.svg#coolveticaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin-right: 2%;
     margin-left: 2%;
+    color: #343A40;
+}
+
+h1 {
+    font-family: 'coolveticaregular';
+    font-size: 3em;
+    letter-spacing: 0.05em;
 }
 
 header {
@@ -16,6 +35,8 @@ nav
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    font-family: 'coolveticaregular';
+    font-size: 1.3em;
 }
 
 ul {
@@ -29,6 +50,22 @@ li {
     list-style-type: none;
 }
 
+li a {
+    text-decoration: none;
+    color: #343A40;
+}
+
+h3 {
+    font-family: 'coolveticaregular';
+    font-size: 2em;
+    letter-spacing: 0.07em;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 1em;
+}
+
 #product-grid {
     height: 100%;
     padding-left: 2vw;
@@ -38,6 +75,10 @@ li {
     display: flex;
     flex-wrap: wrap;
 }
+#product-grid a {
+    text-decoration: none;
+    color: #343A40;
+}
 @media screen and (max-width: 768px) {
     #product-grid {
       flex-direction: column;
@@ -45,12 +86,26 @@ li {
   }
 
 .products {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
+    border-radius: 3px;
+    box-shadow: 5px 3px 10px rgb(100, 97, 92);
     width: 40%;
     margin: auto;
     margin-bottom: 2vw;
     text-align: justify;
+    cursor: pointer;
+    transition: all 0.4s ease;
 }
+
+.products:hover {
+    transform: scale(1.04);
+}
+
+.products-text {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 @media screen and (max-width: 768px) {
     .products {
       width: 75%;

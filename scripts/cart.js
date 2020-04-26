@@ -152,7 +152,7 @@ document.getElementById("theform").addEventListener('submit', function(){
     };
     request.open("POST", "http://localhost:3000/api/cameras/order");
     request.setRequestHeader("Content-Type", "application/json");
-    request.send("order");
+    request.send();
 });
 
 document.getElementById('theformtest').onsubmit = function() { 
