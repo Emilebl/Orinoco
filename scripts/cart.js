@@ -95,13 +95,16 @@ console.log(CART.contents);
 const emptyCartButton = document.getElementById("emptyCartButton");
 const cartContainer = document.getElementById("cartContainer");
 
-let cartResume = CART.contents;
 
+let cartResume = CART.contents;
+let totalOrder = 0;
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
     const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
     cartContainer.innerHTML += afficherItems;
+    totalOrder += item.itemPrice * item.qty;
 });
+console.log(totalOrder);
 
 // Récupération de la liste des id des produits placés dans le panier
 let products = cartResume.map(function(item){
