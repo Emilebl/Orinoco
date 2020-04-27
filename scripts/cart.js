@@ -122,16 +122,13 @@ console.log(products);
 // Envoi du formulaire
 
 let submitButton = document.getElementById("submit");
-let form = document.getElementById("theform");
+let form = document.getElementById("form");
 
-document.getElementById("theform").addEventListener('submit', function(){
-    // localStorage.setItem("contact", JSON.stringify(contact));
-    // localStorage.setItem("products", JSON.stringify(products));
-    // e.preventDefault;
+document.getElementById("form").addEventListener('submit', function(){
     let contact = {
         firstName: document.getElementById("fname").value,
         lastName: document.getElementById("lname").value,
-        adress: document.getElementById("address").value,
+        address: document.getElementById("address").value,
         city: document.getElementById("city").value,
         email: document.getElementById("email").value
     }
@@ -142,17 +139,9 @@ document.getElementById("theform").addEventListener('submit', function(){
         products
     };
     console.log(order);
-    // return false;
-    var request = new XMLHttpRequest();
-    request.onload = function() {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            var orderConfirmation = JSON.parse(this.responseText);
-            console.log(orderConfirmation);
-        };
-    };
-    request.open("POST", "http://localhost:3000/api/cameras/order");
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send();
+    // envoi de "order" au local storage
+    localStorage.setItem("commande", JSON.stringify(order));
+    
 });
 
 // document.getElementById('theformtest').onsubmit = function() { 
@@ -160,7 +149,10 @@ document.getElementById("theform").addEventListener('submit', function(){
 //   return false;
 // };
 
-// emptyCartButton.addEventListener('click', CART.empty());
+emptyCartButton.addEventListener('click', function() {
+    CART.empty()
+    cartContainer.innerHTML = "<p>Votre panié est vide !</p>"
+});
 
 // FOR ORDER
 /**
