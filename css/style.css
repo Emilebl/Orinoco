@@ -22,12 +22,19 @@ h1 {
     font-size: 3em;
     letter-spacing: 0.05em;
 }
+@media screen and (max-width: 768px) {
+    h1 {
+      font-size: 2em;
+    }
+  }
 
 header {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     border: 2px solid black;
 }
+
 
 nav 
 {
@@ -35,7 +42,7 @@ nav
     width: 30%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     font-family: 'coolveticaregular';
     font-size: 1.3em;
 }
@@ -46,6 +53,13 @@ nav ul {
     display: flex;
     justify-content: space-around;
 }
+@media screen and (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 0.8em;
+    }
+  }
 
 li {
     list-style-type: none;
@@ -129,33 +143,37 @@ footer a {
     .products {
       width: 75%;
     }
-  }
+}
 
-img {
+.products img {
     width: 100%;
 }
 /*Mise en page de la page products */
 #product-template {
+    width: 100%;
     margin-top: 3vw;
     margin-bottom: auto;
     padding-top: 1vw;
-    padding-left: 1vw;
     padding-bottom: 1vw;
-    padding-right: 1vw;
     /* border: 2px solid green; */
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
+
 
 #price {
     font-weight: bold;
 }
 
+#image-container {
+    width: 45%;
+}
+
 #image {
-    width: 50%;
+    width: 100%;
     border-radius: 3px;
     box-shadow: grey 3px 3px 8px 3px;
-    margin-right: 1%;
 }
 
 #specification {
@@ -167,7 +185,23 @@ img {
     text-align: center;
     align-items: center;
     margin-left: 1%;
+    width: 50%;
+    height: 100%;
 }
+@media screen and (max-width: 768px) {
+    #product-template {
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+    }
+    #image-container {
+        width: 90%;
+    }
+    #specification {
+        width: 90%;
+    }
+}
+
 
 #description {
     width: 80%;
@@ -196,6 +230,7 @@ button {
 #cartContainer {
     border: 2px dotted grey;
     border-radius: 5px;
+    margin-top: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,6 +249,9 @@ button {
     padding-top: 0.5vw;
 }
 
+#total-order {
+    font-family: sans-serif;
+}
 .cart-images {
     width: 10vw;
     border-radius: 3px;

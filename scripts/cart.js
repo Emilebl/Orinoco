@@ -95,11 +95,13 @@ console.log(CART.contents);
 const emptyCartButton = document.getElementById("emptyCartButton");
 const cartContainer = document.getElementById("cartContainer");
 
-
 let cartResume = CART.contents;
 let totalOrder = document.getElementById("total-order");
 let totalOrderValue = 0;
 
+if (localStorage.getItem(CART.KEY) === "[]") {
+    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`; 
+}
 
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
@@ -108,6 +110,7 @@ cartResume.forEach((item) => {
     totalOrderValue += item.itemPrice * item.qty;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
+
 console.log(totalOrderValue);
 
 
@@ -160,7 +163,7 @@ document.getElementById("form").addEventListener('submit', function(){
 
 emptyCartButton.addEventListener('click', function() {
     CART.empty()
-    cartContainer.innerHTML = "<p>Votre panié est vide !</p>"
+    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`
     totalOrderValue = 0;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
