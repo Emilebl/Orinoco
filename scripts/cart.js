@@ -97,14 +97,19 @@ const cartContainer = document.getElementById("cartContainer");
 
 
 let cartResume = CART.contents;
-let totalOrder = 0;
+let totalOrder = document.getElementById("total-order");
+let totalOrderValue = 0;
+
+
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
     const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
     cartContainer.innerHTML += afficherItems;
-    totalOrder += item.itemPrice * item.qty;
+    totalOrderValue += item.itemPrice * item.qty;
+    totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
-console.log(totalOrder);
+console.log(totalOrderValue);
+
 
 // Récupération de la liste des id des produits placés dans le panier
 let products = cartResume.map(function(item){
@@ -144,6 +149,7 @@ document.getElementById("form").addEventListener('submit', function(){
     console.log(order);
     // envoi de "order" au local storage
     localStorage.setItem("commande", JSON.stringify(order));
+    localStorage.setItem("totalorder", JSON.stringify(totalOrderValue));
     
 });
 
@@ -155,6 +161,8 @@ document.getElementById("form").addEventListener('submit', function(){
 emptyCartButton.addEventListener('click', function() {
     CART.empty()
     cartContainer.innerHTML = "<p>Votre panié est vide !</p>"
+    totalOrderValue = 0;
+    totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
 
 // FOR ORDER

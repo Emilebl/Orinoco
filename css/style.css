@@ -194,7 +194,8 @@ button {
 
 /*Mise en page de la page panier */
 #cartContainer {
-    /* border: 2px solid blue; */
+    border: 2px dotted grey;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;

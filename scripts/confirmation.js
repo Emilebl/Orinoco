@@ -1,4 +1,5 @@
 let order = JSON.parse(localStorage.getItem("commande"));
+let totalOrderValue = JSON.parse(localStorage.getItem("totalorder"));
 let orderConfirmation = document.getElementById("orderConfirmation");
 // Envoi de la commande à la base de donnée
 var request = new XMLHttpRequest();
@@ -6,7 +7,7 @@ var request = new XMLHttpRequest();
         if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
          var orderId = JSON.parse(this.responseText);
             console.log(orderId);
-            orderConfirmation.innerHTML = `<h2>Merci pour votre commande !</h2><p>Pour un prix total de</p><p>Votre numéro de commande est le N°${orderId.orderId}</p>`
+            orderConfirmation.innerHTML = `<h2>Merci pour votre commande !</h2><p>Pour un prix total de ${totalOrderValue} €</p><p>Votre numéro de commande est le N°${orderId.orderId}</p>`
         };
     };
     request.open("POST", "http://localhost:3000/api/cameras/order");
