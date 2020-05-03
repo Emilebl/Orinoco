@@ -93,6 +93,7 @@ const CART = {
 
 
 // Recupération des éléments du DOM afin de les modifier ensuite
+const productTemplate = document.getElementById("product-template");
 const specification = document.getElementById("specification");
 const imageDisplay = document.getElementById("image"); 
 const nameDisplay = document.getElementById("name");
@@ -124,6 +125,8 @@ function promiseJax (url) {
         request.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 resolve(this.responseText);
+            } else {
+                reject(new Error ("Oups! Une erreur est survenue !"));
             };  
         };
         request.onerror = function () {
@@ -162,6 +165,7 @@ promiseJax(myLocalHost).then(function (product) {
     });
 }).catch(function (err){
     console.error(err);
+    productTemplate.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
 });
 
 

@@ -11,6 +11,8 @@ function promiseJax (url) {
         request.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
                 resolve(this.responseText);
+            } else {
+                reject(new Error ("Oups! Une erreur est survenue !"));
             };
         };
         request.onerror = function () {
@@ -31,6 +33,7 @@ promiseJax("http://localhost:3000/api/cameras/order").then(function (_orderRecap
     
 }).catch(function (err){
     console.error(err);
+    orderConfirmation.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
 });
 
 
