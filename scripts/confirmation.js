@@ -29,7 +29,7 @@ function promiseJax (url) {
 promiseJax("http://localhost:3000/api/cameras/order").then(function (_orderRecap) {
     var orderRecap = JSON.parse(_orderRecap);
     console.log(orderRecap);
-    orderConfirmation.innerHTML = `<h2>Merci pour votre commande !</h2><p>Pour un prix total de ${totalOrderValue} €</p><p>Votre numéro de commande est le N°${orderRecap.orderId}</p>`
+    orderConfirmation.innerHTML = `<h2>Merci pour votre commande !</h2><p>Pour un prix total de <span id="prixCommande">${totalOrderValue} €</span></p><p>Votre numéro de commande est le <span id="numeroCommande">N°${orderRecap.orderId}</span></p>`
     
 }).catch(function (err){
     console.error(err);
