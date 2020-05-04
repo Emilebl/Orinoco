@@ -1,108 +1,56 @@
-// const e = require("express");
-
+// Déclaration de l'objet CART pour le panier avec ses fonctionnalités + création de son reflet dans le localStorage
 const CART = {
     KEY: 'rfrgrdg45dg15drg1dr',
     contents: [],
     init(){ 
-        // check localStorage and initialize the contents of CART.contents
+        // check le contenu du localStorage et initialise le contenu de CART.contents
         let _contents = localStorage.getItem(CART.KEY);
         if(_contents) {
+            // Si il y a déjà des données: on les récupère pour mettre à jour CART.contents
             CART.contents = JSON.parse(_contents);
         } else {
-            // possible to use dummy data in the array
+            // Sinon on crée un array vide, et on synchronise notre objet JS avec le localStorage grace a la fonction sync
             CART.contents = [];
             CART.sync();
         }
     },
+    // Fonction pour synchroniser "CART.contents" qui est un array et l'équivalent "string" dans le localStorage
     async sync() {
         let _cart = JSON.stringify(CART.contents);
         await localStorage.setItem(CART.KEY, _cart);
     },
-    find(myId){
-        // find an item in the cart by its id (some"id" might be changed according to its key in the back end or here (myId ?))
-        let match = CART.contents.filter(item =>{
-            if(item.id == myId)
-            return true;
-        });
-        if(match && match[0])
-        return match[0];
-    },
-    add(myId){
-        // add a new item in the cart
-        // check if the item is not already in the cart
-        if (CART.find(myId)){
-            CART.increase(myId, 1);
-        } else {
-            // in the exemple it looks for which item we want with a filter method looking all the products from the database searching for a matching id, 
-            // but in our case it is only the product that is currently displayed on the page
-            let obj = {
-                id: myId,
-                title: camera.name,
-                image: camera.imageUrl,
-                qty: 1,
-                itemPrice: camera.price/100,
-            };
-            // push the object to the contents of CART
-            CART.contents.push(obj);
-            // update localStorage
-            CART.sync();
-        }
-    },
-    increase(myId, qty=1){
-        // increase the quantity of an item in the cart
-        CART.contents = CART.contents.map(item=>{
-            if(item.id === myId)
-            item.qty = item.qty + qty;
-            return item
-        });
-        // update localStorage
-        CART.sync();
-    },
-    reduce(myId, qty=1){
-        // increase the quantity of an item in the cart
-        CART.contents = CART.contents.map(item=>{
-            if(item.id === myId)
-            item.qty = item.qty - qty;
-            return item
-        });
-        // remove item from cart if the qty is 0
-        CART.contents.forEach(async items => {
-            if(item.id === myId && item.qty === 0)
-            CART.remove(myId);
-        });
-        // update localStorage
-        CART.sync();
-    },
-    remove(myId){
-        CART.contents = CART.contents.filter(item =>{
-            if(item.id !== myId)
-            return true;
-        });
-        // update localStorage
-        CART.sync();
-    },
+    // Fonction pour vider le panier
     empty(){
-        // empty whole cart
         CART.contents = [];
-        // update localStorage
+        // Mise à jour du localStorage avec sync
         CART.sync();
         console.log(CART.contents);
     }
 };
+// Initialisation du panier avec CART.init dès le chargement de la page
 CART.init();
 console.log(CART.contents);
 
+// Recupération des éléments du DOM afin de les modifier ensuite
 const emptyCartButton = document.getElementById("emptyCartButton");
 const cartContainer = document.getElementById("cartContainer");
+const totalOrder = document.getElementById("total-order");
 
+// Déclaration de CART.contents dans une variable cartResume
 let cartResume = CART.contents;
-let totalOrder = document.getElementById("total-order");
+
+// Initialisation de la valeur du prix total du panier à 0
 let totalOrderValue = 0;
 
+// Si le Panier est vide dans le localStorage et donc correspond à un array vide, 
+// on affiche dans le DOM un message indiquant cela
 if (localStorage.getItem(CART.KEY) === "[]") {
     cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`; 
 }
 
+// Sinon on affiche dans le DOM chaque produit du panier
+// Avec à chaque fois son prix à l'unité, sa quantité et son prix total déduit de la quantité
+// On ajoute également le prix total du panier
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
     const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
@@ -113,28 +61,22 @@ cartResume.forEach((item) => {
 
 console.log(totalOrderValue);
 
+// Récupération des information à envoyer à l'API lors de la commande.
+// On enverra ici ces information dans le localStorage et la requete vers API se fera sur la page de confirmation
 
-// Récupération de la liste des id des produits placés dans le panier
+// Récupération de la liste d'id des produits placés dans le panier
 let products = cartResume.map(function(item){
     return item.id
 });
 console.log(products);
 
-// Récupération des information du formulaire
-
-// let firstNameValue = document.getElementById("fname").value;
-// let lastNameValue = document.getElementById("lname").value;
-// let addressValue = document.getElementById("address").value;
-// let cityValue = document.getElementById("city").value;
-// let emailValue = document.getElementById("email").value;
-
-
-
-// Envoi du formulaire
+// Récupération des informations du formulaire + Envoi du formulaire
 
 let submitButton = document.getElementById("submit");
 let form = document.getElementById("form");
 
+// Ecoute de l'evenement "submit" sur l'élément <form>, qui va envoyer vers le localStorage l'objet "order"
+// contenant lui meme les objets "contact" et "products"
 document.getElementById("form").addEventListener('submit', function(){
     let contact = {
         firstName: document.getElementById("fname").value,
@@ -150,35 +92,17 @@ document.getElementById("form").addEventListener('submit', function(){
         products
     };
     console.log(order);
+
     // envoi de "order" au local storage
     localStorage.setItem("commande", JSON.stringify(order));
     localStorage.setItem("totalorder", JSON.stringify(totalOrderValue));
     
 });
 
-// document.getElementById('theformtest').onsubmit = function() { 
-// 	console.log(document.getElementById('searchTerm').value);
-//   return false;
-// };
-
+// Ecoute de l'evenement "clic" sur le boutton "vider le panier", qui va vider le panier et afficher un message
 emptyCartButton.addEventListener('click', function() {
     CART.empty()
     cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`
     totalOrderValue = 0;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
-
-// FOR ORDER
-/**
-*
-* Expects request to contain:
-* contact: {
-*   firstName: string,
-*   lastName: string,
-*   address: string,
-*   city: string,
-*   email: string
-* }
-* products: [string] <-- array of product _id
-*
-*/
