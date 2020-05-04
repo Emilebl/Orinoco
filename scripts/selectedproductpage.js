@@ -1,4 +1,4 @@
-// Déclaration de l'objet CART pour le panier, avec ses fonctionnalités.
+// 1 - Déclaration de l'objet CART pour le panier avec ses fonctionnalités + création de son reflet dans le localStorage
 const CART = {
     KEY: 'rfrgrdg45dg15drg1dr',
     contents: [],
@@ -7,10 +7,10 @@ const CART = {
         // check le contenu du localStorage et initialise le contenu de CART.contents
         let _contents = localStorage.getItem(CART.KEY);
         if(_contents) {
-            // Si il y a déjà des données: on les récupère
+            // Si il y a déjà des données: on les récupère pour mettre à jour CART.contents
             CART.contents = JSON.parse(_contents);
         } else {
-            // Sinon on crée un array vide, et on synchronise notre objet JS avec le localStorage
+            // Sinon on crée un array vide, et on synchronise notre objet JS avec le localStorage grace a la fonction sync
             CART.contents = [];
             CART.sync();
         }
@@ -60,29 +60,6 @@ const CART = {
         // Mise à jour du localStorage avec sync
         CART.sync();
     },
-    // reduce(myId, qty=1){
-    //     // increase the quantity of an item in the cart
-    //     CART.contents = CART.contents.map(item=>{
-    //         if(item.id === myId)
-    //         item.qty = item.qty - qty;
-    //         return item
-    //     });
-    //     // remove item from cart if the qty is 0
-    //     CART.contents.forEach(async items => {
-    //         if(item.id === myId && item.qty === 0)
-    //         CART.remove(myId);
-    //     });
-    //     // update localStorage
-    //     CART.sync();
-    // },
-    // remove(myId){
-    //     CART.contents = CART.contents.filter(item =>{
-    //         if(item.id !== myId)
-    //         return true;
-    //     });
-    //     // update localStorage
-    //     CART.sync();
-    // },
     // Fonction pour vider le panier
     empty(){
         CART.contents = [];
@@ -92,7 +69,7 @@ const CART = {
 };
 
 
-// Recupération des éléments du DOM afin de les modifier ensuite
+// 2 - Recupération des éléments du DOM afin de les modifier ensuite
 const productTemplate = document.getElementById("product-template");
 const specification = document.getElementById("specification");
 const imageDisplay = document.getElementById("image"); 
@@ -103,11 +80,13 @@ const personalisationName = document.getElementById("personalisation-name");
 const personalisationDisplay = document.getElementById("lenses");
 const addToCartButton = document.createElement("button");
 
-// Recupération de l'id du produit selectionné, depuis l'url de la page actuelle
+// 3 - Recupération de l'id du produit selectionné, depuis l'url de la page actuelle
+
+// Récupération de l'url
 function getURL() {
     return window.location.href;
 }
-
+// Récupération de l'id
 function getElement() {
     var url = new URL(getURL());
     var urlId = url.searchParams.get('id');
@@ -115,21 +94,29 @@ function getElement() {
     return urlId;
 }
 
+// On place la valeur de l'id dans une variable myId
 var myId = getElement();
 
-// Récupération du produit correspondant à l'id récupéré + affichage des propriétés spécifiques au produit
+// 4 - Récupération du produit correspondant à l'id récupéré + affichage des propriétés spécifiques au produit
 
+// On imbrique notre requete AJAX dans une promesse
 function promiseJax (url) {
     return new Promise(function (resolve, reject){
         var request = new XMLHttpRequest();
         request.onload = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                // Si le status de la requete = 200, on execute la fonction "resolve" 
+                // en lui passant en paramètre la réponse à notre requete
                 resolve(this.responseText);
             } else {
+                // Si le status est != à 200, on execute la fonction "reject" 
+                // en lui passant un paramètre une nouvelle erreur avec un message spécifique
                 reject(new Error ("Oups! Une erreur est survenue !"));
             };  
         };
         request.onerror = function () {
+            // Si la requete ne peux être lancée, on execute également "reject" 
+            // mais en passant une autre erreur en parametre, avec un message différent
             reject(new Error ("Erreur Réseau"));
         };
         request.open("GET", url);
@@ -137,11 +124,14 @@ function promiseJax (url) {
     });
 };
 
+// On déclare l'url avec l'id du produit selectionné dans une variable myLocalHost
 var myLocalHost = "http://localhost:3000/api/cameras/" + myId;
 
-// 2 - On définie ce que vont executer les call backs "Resolve" et "Reject" de notre promesse
+// On définie ce que vont executer les call backs "Resolve" et "Reject" de notre promesse
 promiseJax(myLocalHost).then(function (product) {
+    // Pour le "Resolve" on récupère la réponse de notre API, qui est objet produit
     var camera = JSON.parse(product);
+    // On affiche dans le DOM les différentes caractéristiques du produits qui sont indiquée dans l'objet
     imageDisplay.src = camera.imageUrl;
     nameDisplay.innerHTML = camera.name;
     priceDisplay.innerHTML = camera.price/100 + " €";
@@ -157,13 +147,16 @@ promiseJax(myLocalHost).then(function (product) {
         option.value = lense;
         option.innerHTML = lense;
     });
+    // Initialisation du panier avec CART.init
     CART.init();
     console.log(CART.contents);
+    // Ecoute d'evenement qui va ajouter le produit de la page au panier à chaque clic sur le bouton
     addToCartButton.addEventListener("click", function() {
         CART.add(myId, camera);
         console.log(CART.contents);
     });
 }).catch(function (err){
+    // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée
     console.error(err);
     productTemplate.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
 });
