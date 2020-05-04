@@ -95,6 +95,7 @@ document.getElementById("form").addEventListener('submit', function(){
 
     // envoi de "order" au local storage
     localStorage.setItem("commande", JSON.stringify(order));
+    // envoi de du prix total de la commande au local storage
     localStorage.setItem("totalorder", JSON.stringify(totalOrderValue));
     
 });

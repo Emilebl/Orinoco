@@ -119,6 +119,7 @@ function promiseJax (url) {
             // mais en passant une autre erreur en parametre, avec un message différent
             reject(new Error ("Erreur Réseau"));
         };
+        // Ouverture de la requete de type "GET" à l'url spécifié + envoi
         request.open("GET", url);
         request.send();
     });
