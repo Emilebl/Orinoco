@@ -35,6 +35,8 @@ console.log(CART.contents);
 const emptyCartButton = document.getElementById("emptyCartButton");
 const cartContainer = document.getElementById("cartContainer");
 const totalOrder = document.getElementById("total-order");
+const submitButton = document.getElementById("submit");
+const form = document.getElementById("form");
 
 // Déclaration de CART.contents dans une variable cartResume
 let cartResume = CART.contents;
@@ -43,9 +45,10 @@ let cartResume = CART.contents;
 let totalOrderValue = 0;
 
 // Si le Panier est vide dans le localStorage et donc correspond à un array vide, 
-// on affiche dans le DOM un message indiquant cela
+// on affiche dans le DOM un message indiquant cela et on desactive le bouton d'envoi du formulaire
 if (localStorage.getItem(CART.KEY) === "[]") {
-    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`; 
+    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`;
+    submitButton.disabled = true; 
 }
 
 // Sinon on affiche dans le DOM chaque produit du panier
@@ -71,9 +74,6 @@ let products = cartResume.map(function(item){
 console.log(products);
 
 // Récupération des informations du formulaire + Envoi du formulaire
-
-let submitButton = document.getElementById("submit");
-let form = document.getElementById("form");
 
 // Ecoute de l'evenement "submit" sur l'élément <form>, qui va envoyer vers le localStorage l'objet "order"
 // contenant lui meme les objets "contact" et "products"
@@ -101,9 +101,11 @@ document.getElementById("form").addEventListener('submit', function(){
 });
 
 // Ecoute de l'evenement "clic" sur le boutton "vider le panier", qui va vider le panier et afficher un message
+// On désactive également le bouton d'envoi du formulaire
 emptyCartButton.addEventListener('click', function() {
-    CART.empty()
-    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`
+    CART.empty();
+    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`;
     totalOrderValue = 0;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
+    submitButton.disabled = true; 
 });
