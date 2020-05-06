@@ -79,6 +79,7 @@ const descriptionDisplay = document.getElementById("description");
 const personalisationName = document.getElementById("personalisation-name");
 const personalisationDisplay = document.getElementById("lenses");
 const addToCartButton = document.createElement("button");
+addToCartButton.setAttribute("id", "add-to-cart");
 
 // 3 - Recupération de l'id du produit selectionné, depuis l'url de la page actuelle
 

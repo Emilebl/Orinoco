@@ -56,7 +56,7 @@ if (localStorage.getItem(CART.KEY) === "[]") {
 // On ajoute également le prix total du panier
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
-    const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">Prix à l'unité: ${item.itemPrice} €</p><p class="cart-qty">Quantité: ${item.qty}</p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
+    const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">${item.itemPrice} € x <span class="cart-qty">${item.qty}</span></p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
     cartContainer.innerHTML += afficherItems;
     totalOrderValue += item.itemPrice * item.qty;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
