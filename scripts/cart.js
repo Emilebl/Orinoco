@@ -34,7 +34,7 @@ console.log(CART.contents);
 // Recupération des éléments du DOM afin de les modifier ensuite
 const emptyCartButton = document.getElementById("emptyCartButton");
 const cartContainer = document.getElementById("cartContainer");
-const totalOrder = document.getElementById("total-order");
+const totalOrder = document.getElementById("totalOrder");
 const submitButton = document.getElementById("submit");
 const form = document.getElementById("form");
 
@@ -56,7 +56,7 @@ if (localStorage.getItem(CART.KEY) === "[]") {
 // On ajoute également le prix total du panier
 cartResume.forEach((item) => {
     let prixTotalItem = item.itemPrice * item.qty;
-    const afficherItems = `<div class="cart-items"><img class="cart-images" src="${item.image}"><h3 class="cart-names">${item.title}</h3><p class="cart-prices">${item.itemPrice} € x <span class="cart-qty">${item.qty}</span></p><p class="cart-total-prices">Prix total: ${prixTotalItem} €</p>`;
+    const afficherItems = `<div class="cartItems"><img class="cartImages" src="${item.image}"><h3 class="cartNames">${item.title}</h3><p class="cartPrices">${item.itemPrice} € x <span class="cartQty">${item.qty}</span></p><p class="cartTotalPrices">Prix total: ${prixTotalItem} €</p>`;
     cartContainer.innerHTML += afficherItems;
     totalOrderValue += item.itemPrice * item.qty;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
@@ -104,7 +104,7 @@ document.getElementById("form").addEventListener('submit', function(){
 // On désactive également le bouton d'envoi du formulaire
 emptyCartButton.addEventListener('click', function() {
     CART.empty();
-    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`;
+    cartContainer.innerHTML = `<p id="emptyCart">Votre panier est vide !</p>`;
     totalOrderValue = 0;
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
     submitButton.disabled = true; 
