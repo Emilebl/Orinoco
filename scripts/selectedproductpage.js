@@ -70,16 +70,16 @@ const CART = {
 
 
 // 2 - Recupération des éléments du DOM afin de les modifier ensuite
-const productTemplate = document.getElementById("product-template");
+const productTemplate = document.getElementById("productTemplate");
 const specification = document.getElementById("specification");
 const imageDisplay = document.getElementById("image"); 
 const nameDisplay = document.getElementById("name");
 const priceDisplay = document.getElementById("price");
 const descriptionDisplay = document.getElementById("description");
-const personalisationName = document.getElementById("personalisation-name");
+const personalisationName = document.getElementById("personalisationName");
 const personalisationDisplay = document.getElementById("lenses");
 const addToCartButton = document.createElement("button");
-addToCartButton.setAttribute("id", "add-to-cart");
+addToCartButton.setAttribute("id", "addToCart");
 
 // 3 - Recupération de l'id du produit selectionné, depuis l'url de la page actuelle
 
