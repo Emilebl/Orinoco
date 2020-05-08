@@ -160,7 +160,7 @@ promiseJax(myLocalHost).then(function (product) {
 }).catch(function (err){
     // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée
     console.error(err);
-    productTemplate.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
+    productTemplate.innerHTML = `<div class="errorMessage"><p>${err}</p></div>`;
 });
 
 

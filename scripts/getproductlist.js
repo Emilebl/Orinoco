@@ -1,5 +1,5 @@
 // Récupération du conteneur de la liste de produit dans le DOM pour modifier ensuite son contenu
-const productGrid = document.getElementById("product-grid");
+const productGrid = document.getElementById("productGrid");
 
 // Récupération de la liste de produits de la catégorie "Camera" + affichage de la liste des produits
 
@@ -36,14 +36,14 @@ promiseJax("http://localhost:3000/api/cameras").then(function (listeCams) {
     console.log(productsData);
     // Pour chaque élément de l'array, on affiche ses proprietés dans le DOM
     productsData.forEach((product) => {
-        const afficherProduit = `<div class="products"><a href="products.html?id=${product._id}"><img src="${product.imageUrl}"><div class="products-text"><h3>${product.name}</h3><p>${product.price/100} €</p><p>${product.description}</p></div>`;
+        const afficherProduit = `<div class="products"><a href="products.html?id=${product._id}"><img src="${product.imageUrl}"><div class="productsText"><h3>${product.name}</h3><p>${product.price/100} €</p><p>${product.description}</p></div>`;
         productGrid.innerHTML += afficherProduit;
         console.log(product._id);
     });
 }).catch(function (err){
     // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée
     console.error(err);
-    productGrid.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
+    productGrid.innerHTML = `<div class="errorMessage"><p>${err}</p></div>`;
 });
 
 

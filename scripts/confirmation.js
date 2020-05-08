@@ -48,7 +48,7 @@ promiseJax("http://localhost:3000/api/cameras/order").then(function (_orderRecap
 }).catch(function (err){
     // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée
     console.error(err);
-    orderConfirmation.innerHTML = `<div class="error-message"><p>${err}</p></div>`;
+    orderConfirmation.innerHTML = `<div class="errorMessage"><p>${err}</p></div>`;
 });
 
 

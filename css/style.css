@@ -111,10 +111,18 @@ footer a {
     font-family: sans-serif;
 }
 
+.errorMessage {
+    font-family: 'coolveticaregular';
+    font-size: 1.5em;
+    letter-spacing: 0.07em;
+    color: rgb(231, 18, 18);
+    text-align: center;
+}
+
 
 /*Mise en page du body de l'index*/
 
-#product-grid {
+#productGrid {
     height: 100%;
     padding-left: 2vw;
     padding-right: 2vw;
@@ -123,12 +131,12 @@ footer a {
     display: flex;
     flex-wrap: wrap;
 }
-#product-grid a {
+#productGrid a {
     text-decoration: none;
     color: #343A40;
 }
 @media screen and (max-width: 768px) {
-    #product-grid {
+    #productGrid {
       flex-direction: column;
     }
   }
@@ -150,7 +158,7 @@ footer a {
     transform: scale(1.04);
 }
 
-.products-text {
+.productsText {
     padding-left: 5%;
     padding-right: 5%;
 }
