@@ -91,7 +91,6 @@ function getURL() {
 function getElement() {
     var url = new URL(getURL());
     var urlId = url.searchParams.get('id');
-    console.log(urlId + "getElement");
     return urlId;
 }
 
@@ -151,11 +150,9 @@ promiseJax(myLocalHost).then(function (product) {
     });
     // Initialisation du panier avec CART.init
     CART.init();
-    console.log(CART.contents);
     // Ecoute d'evenement qui va ajouter le produit de la page au panier à chaque clic sur le bouton
     addToCartButton.addEventListener("click", function() {
         CART.add(myId, camera);
-        console.log(CART.contents);
     });
 }).catch(function (err){
     // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée

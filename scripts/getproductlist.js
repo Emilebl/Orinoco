@@ -33,12 +33,10 @@ function promiseJax (url) {
 promiseJax("http://localhost:3000/api/cameras").then(function (listeCams) {
     // Pour le "Resolve" on récupère la réponse de notre API, qui est un array de produits
     var productsData = JSON.parse(listeCams);
-    console.log(productsData);
     // Pour chaque élément de l'array, on affiche ses proprietés dans le DOM
     productsData.forEach((product) => {
         const afficherProduit = `<div class="products"><a href="products.html?id=${product._id}"><img src="${product.imageUrl}"><div class="productsText"><h3>${product.name}</h3><p>${product.price/100} €</p><p>${product.description}</p></div>`;
         productGrid.innerHTML += afficherProduit;
-        console.log(product._id);
     });
 }).catch(function (err){
     // Pour le "Reject" on affiche dans le DOM le message d'erreur qui a été généré, selon l'erreur rencontrée

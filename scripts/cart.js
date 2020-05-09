@@ -24,12 +24,10 @@ const CART = {
         CART.contents = [];
         // Mise à jour du localStorage avec sync
         CART.sync();
-        console.log(CART.contents);
     }
 };
 // Initialisation du panier avec CART.init dès le chargement de la page
 CART.init();
-console.log(CART.contents);
 
 // Recupération des éléments du DOM afin de les modifier ensuite
 const emptyCartButton = document.getElementById("emptyCartButton");
@@ -47,7 +45,7 @@ let totalOrderValue = 0;
 // Si le Panier est vide dans le localStorage et donc correspond à un array vide, 
 // on affiche dans le DOM un message indiquant cela et on desactive le bouton d'envoi du formulaire
 if (localStorage.getItem(CART.KEY) === "[]") {
-    cartContainer.innerHTML = `<p id="empty-cart">Votre panier est vide !</p>`;
+    cartContainer.innerHTML = `<p id="emptyCart">Votre panier est vide !</p>`;
     submitButton.disabled = true; 
 }
 
@@ -62,8 +60,6 @@ cartResume.forEach((item) => {
     totalOrder.innerHTML = `Prix total du panier: ${totalOrderValue} €`;
 });
 
-console.log(totalOrderValue);
-
 // Récupération des information à envoyer à l'API lors de la commande.
 // On enverra ici ces information dans le localStorage et la requete vers API se fera sur la page de confirmation
 
@@ -71,7 +67,6 @@ console.log(totalOrderValue);
 let products = cartResume.map(function(item){
     return item.id
 });
-console.log(products);
 
 // Récupération des informations du formulaire + Envoi du formulaire
 
@@ -85,13 +80,10 @@ document.getElementById("form").addEventListener('submit', function(){
         city: document.getElementById("city").value,
         email: document.getElementById("email").value
     }
-    console.log(contact);
-    console.log(products);
     let order = {
         contact,
         products
     };
-    console.log(order);
 
     // envoi de "order" au local storage
     localStorage.setItem("commande", JSON.stringify(order));

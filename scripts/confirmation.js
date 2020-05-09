@@ -42,7 +42,6 @@ promiseJax("http://localhost:3000/api/cameras/order").then(function (_orderRecap
     // Pour le "Resolve" on affiche un message de confirmation de la commande, rappellant son prix total
     // On affiche également le numéro de commande généré par l'API en réponse à la requete
     var orderRecap = JSON.parse(_orderRecap);
-    console.log(orderRecap);
     orderConfirmation.innerHTML = `<h2>Merci pour votre commande !</h2><p>Pour un prix total de <span id="prixCommande">${totalOrderValue} €</span></p><p>Votre numéro de commande est le <span id="numeroCommande">N°${orderRecap.orderId}</span></p>`
     
 }).catch(function (err){
