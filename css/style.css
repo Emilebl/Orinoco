@@ -74,7 +74,7 @@ li {
     list-style-type: none;
 }
 
-li a {
+header a {
     text-decoration: none;
     color: #343A40;
 }
