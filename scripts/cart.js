@@ -1,6 +1,6 @@
 // Déclaration de l'objet CART pour le panier avec ses fonctionnalités + création de son reflet dans le localStorage
 const CART = {
-    KEY: 'rfrgrdg45dg15drg1dr',
+    KEY: 'PanierOrinocoLocalStorage',
     contents: [],
     init(){ 
         // check le contenu du localStorage et initialise le contenu de CART.contents
